@@ -1,0 +1,78 @@
+# Version catalog for erp-systems.
+# Verified against Maven Central on 2026-10-21:
+#   - Spring Boot 4.1.1 (managed Hibernate 7.4.5.Final, Spring Framework 7.0.9, Flyway 12.4.0, jOOQ 3.21.7)
+#   - Spring Modulith 2.1.1 (Boot 4 line)
+#   - Blaze-Persistence 1.6.20 (integration-hibernate-7.0/-7.1/-7.2 and integration-spring-data-4.0 exist;
+#     blaze-persistence-parent 1.6.20 tests Hibernate 7.4.5.Final exactly)
+#   - springdoc-openapi 3.1.1 (Boot 4 / Spring Framework 7 compatible line)
+#   - Zalando Logbook 4.2.0 (latest release; Boot 4 compatibility verified by compile+tests in this repo)
+#   - JobRunr 9.0.2 jobrunr-spring-boot-4-starter (cataloged; NOT enabled at runtime in Phase 1)
+
+[versions]
+java = "25"
+springBoot = "4.1.1"
+springModulith = "2.1.1"
+blazePersistence = "1.6.20"
+springdoc = "3.1.1"
+logbook = "4.2.0"
+jobrunr = "9.0.2"
+archunit = "1.4.0"
+testcontainers = "1.21.4"
+flyway = "12.4.0"
+
+[libraries]
+# --- Spring Boot starters (versions come from the Boot BOM via the plugin/platform) ---
+spring-boot-starter-webmvc = { group = "org.springframework.boot", name = "spring-boot-starter-webmvc" }
+spring-boot-starter-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
+spring-boot-starter-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
+spring-boot-starter-security = { group = "org.springframework.boot", name = "spring-boot-starter-security" }
+spring-boot-starter-oauth2-resource-server = { group = "org.springframework.boot", name = "spring-boot-starter-oauth2-resource-server" }
+spring-boot-starter-oauth2-authorization-server = { group = "org.springframework.boot", name = "spring-boot-starter-oauth2-authorization-server" }
+spring-boot-starter-flyway = { group = "org.springframework.boot", name = "spring-boot-starter-flyway" }
+spring-boot-starter-jooq = { group = "org.springframework.boot", name = "spring-boot-starter-jooq" }
+spring-boot-starter-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator" }
+spring-boot-starter-freemarker = { group = "org.springframework.boot", name = "spring-boot-starter-freemarker" }
+spring-boot-starter-mail = { group = "org.springframework.boot", name = "spring-boot-starter-mail" }
+spring-boot-starter-restclient = { group = "org.springframework.boot", name = "spring-boot-starter-restclient" }
+spring-boot-starter-data-redis = { group = "org.springframework.boot", name = "spring-boot-starter-data-redis" }
+spring-boot-starter-cache = { group = "org.springframework.boot", name = "spring-boot-starter-cache" }
+spring-boot-micrometer-tracing-brave = { group = "org.springframework.boot", name = "spring-boot-micrometer-tracing-brave" }
+micrometer-registry-prometheus = { group = "io.micrometer", name = "micrometer-registry-prometheus" }
+flyway-database-postgresql = { group = "org.flywaydb", name = "flyway-database-postgresql" }
+postgresql = { group = "org.postgresql", name = "postgresql" }
+
+# --- Spring Modulith (via BOM) ---
+spring-modulith-bom = { group = "org.springframework.modulith", name = "spring-modulith-bom", version.ref = "springModulith" }
+spring-modulith-core = { group = "org.springframework.modulith", name = "spring-modulith-core" }
+spring-modulith-starter-core = { group = "org.springframework.modulith", name = "spring-modulith-starter-core" }
+spring-modulith-events-core = { group = "org.springframework.modulith", name = "spring-modulith-events-core" }
+spring-modulith-runtime = { group = "org.springframework.modulith", name = "spring-modulith-runtime" }
+spring-modulith-test = { group = "org.springframework.modulith", name = "spring-modulith-test" }
+
+# --- Blaze-Persistence (Jakarta artifacts, Hibernate 7.x + Spring Data 4.x integrations) ---
+blaze-core-api = { group = "com.blazebit", name = "blaze-persistence-core-api-jakarta", version.ref = "blazePersistence" }
+blaze-core-impl = { group = "com.blazebit", name = "blaze-persistence-core-impl-jakarta", version.ref = "blazePersistence" }
+blaze-entity-view-api = { group = "com.blazebit", name = "blaze-persistence-entity-view-api-jakarta", version.ref = "blazePersistence" }
+blaze-entity-view-impl = { group = "com.blazebit", name = "blaze-persistence-entity-view-impl-jakarta", version.ref = "blazePersistence" }
+blaze-entity-view-processor = { group = "com.blazebit", name = "blaze-persistence-entity-view-processor-jakarta", version.ref = "blazePersistence" }
+blaze-integration-hibernate70 = { group = "com.blazebit", name = "blaze-persistence-integration-hibernate-7.0", version.ref = "blazePersistence" }
+blaze-integration-spring-data-40 = { group = "com.blazebit", name = "blaze-persistence-integration-spring-data-4.0", version.ref = "blazePersistence" }
+
+# --- API docs, logging, jobs ---
+springdoc-starter-webmvc-ui = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
+logbook-spring-boot-starter = { group = "org.zalando", name = "logbook-spring-boot-starter", version.ref = "logbook" }
+jobrunr-spring-boot-4-starter = { group = "org.jobrunr", name = "jobrunr-spring-boot-4-starter", version.ref = "jobrunr" }
+
+# --- Testing ---
+archunit-junit5 = { group = "com.tngtech.archunit", name = "archunit-junit5", version.ref = "archunit" }
+testcontainers-bom = { group = "org.testcontainers", name = "testcontainers-bom", version.ref = "testcontainers" }
+testcontainers-postgresql = { group = "org.testcontainers", name = "postgresql" }
+testcontainers-junit = { group = "org.testcontainers", name = "junit-jupiter" }
+spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
+spring-security-test = { group = "org.springframework.security", name = "spring-security-test" }
+
+[bundles]
+blaze-runtime = ["blaze-core-impl", "blaze-entity-view-impl", "blaze-integration-hibernate70"]
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
