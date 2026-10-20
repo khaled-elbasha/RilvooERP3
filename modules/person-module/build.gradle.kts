@@ -17,7 +17,6 @@ dependencies {
 
     testImplementation(project(":database:audit"))
     testImplementation(project(":database:person"))
-    testImplementation(platform("org.testcontainers:testcontainers-bom:1.21.4"))
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-starter-data-jpa")
     testImplementation("org.springframework.boot:spring-boot-starter-flyway")

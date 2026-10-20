@@ -30,5 +30,9 @@ gradlePlugin {
             id = "erp.java-library"
             implementationClass = "erp.convention.JavaLibraryConventionPlugin"
         }
+        create("bootPlatformCatalog") {
+            id = "erp.boot-platform-catalog"
+            implementationClass = "erp.convention.BootPlatformCatalogConventionPlugin"
+        }
     }
 }

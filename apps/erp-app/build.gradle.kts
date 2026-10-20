@@ -3,9 +3,12 @@
 plugins {
     // The Boot Gradle plugin marker is resolved from Maven Central (verified 4.1.1 exists there).
     id("org.springframework.boot") version "4.1.1"
-    id("io.spring.dependency-management") version "1.1.7"
     // Java 25 toolchain + UTF-8 + JUnit platform conventions shared with library projects.
     id("erp.java-base")
+    // Applies the Spring Boot BOM (spring-boot-dependencies:4.1.1) as an imported platform for every
+    // configuration, including testRuntime/testCompile and annotationProcessor paths. Replaces the old
+    // io.spring.dependency-management plugin so that catalog aliases WITHOUT versions resolve correctly.
+    id("erp.boot-platform-catalog")
 }
 
 dependencies {
@@ -48,24 +51,22 @@ dependencies {
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
-    testImplementation(platform("org.testcontainers:testcontainers-bom:1.21.4"))
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
-    testImplementation("org.springframework.modulith:spring-modulith-test")
-    testImplementation(platform("org.springframework.modulith:spring-modulith-bom:2.1.1"))
-    testImplementation("com.tngtech.archunit:archunit-junit5:1.4.0")
-    testImplementation("org.testcontainers:postgresql")
-    testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.1.1")
+    // Spring Modulith BOM must precede version-less Modulith coordinates in the same configuration.
+    testImplementation(platform(libs.spring.modulith.bom))
+    testImplementation(libs.spring.modulith.test)
+    // Boot 4 Testcontainers integration (@ServiceConnection / @Testcontainers containers as beans).
+    // Test-only; never on the production runtime classpath.
+    testImplementation(libs.spring.boot.testcontainers)
+    testImplementation(libs.archunit.junit5)
+    testImplementation(libs.testcontainers.postgresql)
+    testImplementation(libs.testcontainers.junit)
+    testImplementation(libs.springdoc.starter.webmvc.ui)
     // Logbook is verified on the test+runtime classpath of the app (Boot 4 compatibility proven here).
     implementation("org.zalando:logbook-spring-boot-starter:4.2.0")
 }
 
-dependencyManagement {
-    imports {
-        mavenBom("org.springframework.modulith:spring-modulith-bom:2.1.1")
-    }
-}
 
 tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
     archiveBaseName.set("erp-systems-app")
