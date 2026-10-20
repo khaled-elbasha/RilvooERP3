@@ -1,7 +1,11 @@
 // apps:erp-app — the ONLY executable Spring Boot application in erp-systems.
 // Composition/bootstrap only; no business controller/service logic lives here.
 plugins {
-    id("erp.spring-boot-app")
+    // The Boot Gradle plugin marker is resolved from Maven Central (verified 4.1.1 exists there).
+    id("org.springframework.boot") version "4.1.1"
+    id("io.spring.dependency-management") version "1.1.7"
+    // Java 25 toolchain + UTF-8 + JUnit platform conventions shared with library projects.
+    id("erp.java-base")
 }
 
 dependencies {

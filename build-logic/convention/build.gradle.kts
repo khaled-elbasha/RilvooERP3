@@ -7,10 +7,18 @@ repositories {
     gradlePluginPortal()
 }
 
-dependencies {
-    // Compile-time access to the Spring Boot Gradle plugin so a convention plugin can apply it.
-    compileOnly("org.springframework.boot:spring-boot-gradle-plugin:4.1.1")
+// Java 25 toolchain for build-logic itself. Declared inline (not via a self-referencing
+// convention plugin) because a project cannot apply its own gradlePlugin in the plugins block.
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(25))
 }
+
+tasks.withType<JavaCompile>().configureEach { options.encoding = "UTF-8" }
+
+// NOTE: no compileOnly dependency on org.springframework.boot:spring-boot-gradle-plugin.
+// apps/erp-app applies the Boot plugin directly by marker id (resolved from Maven Central,
+// where the 4.1.1 plugin artifact is published). This keeps the Kotlin-DSL classpath free of
+// the JDK-25 / Kotlin-JVM-target mismatch that the Boot plugin jar triggered here.
 
 gradlePlugin {
     plugins {
@@ -21,10 +29,6 @@ gradlePlugin {
         create("javaLibrary") {
             id = "erp.java-library"
             implementationClass = "erp.convention.JavaLibraryConventionPlugin"
-        }
-        create("springBootApp") {
-            id = "erp.spring-boot-app"
-            implementationClass = "erp.convention.SpringBootAppConventionPlugin"
         }
     }
 }

@@ -17,6 +17,10 @@ class JavaLibraryConventionPlugin : Plugin<Project> {
         val bootVersion = libs.findVersion("springBoot").get().requiredVersion
         dependencies {
             add("implementation", platform("org.springframework.boot:spring-boot-dependencies:$bootVersion"))
+            // The Boot BOM governs compile/runtime/test configurations only. Annotation-processor
+            // paths (e.g. spring-boot-configuration-processor, blaze entity-view-processor) are NOT
+            // BOM-managed, so pin the version here for any project declaring one without a version.
+            add("annotationProcessor", "org.springframework.boot:spring-boot-configuration-processor:$bootVersion")
         }
     }
 }
