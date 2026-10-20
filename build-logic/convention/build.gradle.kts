@@ -16,23 +16,23 @@ java {
 tasks.withType<JavaCompile>().configureEach { options.encoding = "UTF-8" }
 
 // NOTE: no compileOnly dependency on org.springframework.boot:spring-boot-gradle-plugin.
-// apps/erp-app applies the Boot plugin directly by marker id (resolved from Maven Central,
+// apps/example-app applies the Boot plugin directly by marker id (resolved from Maven Central,
 // where the 4.1.1 plugin artifact is published). This keeps the Kotlin-DSL classpath free of
-// the JDK-25 / Kotlin-JVM-target mismatch that the Boot plugin jar triggered here.
+// the JDK-25 / Kotlin-JVM-target mismatch that the Boot plugin jar triggered previously.
 
 gradlePlugin {
     plugins {
         create("javaBase") {
-            id = "erp.java-base"
-            implementationClass = "erp.convention.JavaBaseConventionPlugin"
+            id = "example.java-base"
+            implementationClass = "example.convention.JavaBaseConventionPlugin"
         }
         create("javaLibrary") {
-            id = "erp.java-library"
-            implementationClass = "erp.convention.JavaLibraryConventionPlugin"
+            id = "example.java-library"
+            implementationClass = "example.convention.JavaLibraryConventionPlugin"
         }
         create("bootPlatformCatalog") {
-            id = "erp.boot-platform-catalog"
-            implementationClass = "erp.convention.BootPlatformCatalogConventionPlugin"
+            id = "example.boot-platform-catalog"
+            implementationClass = "example.convention.BootPlatformCatalogConventionPlugin"
         }
     }
 }

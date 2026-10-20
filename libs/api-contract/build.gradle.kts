@@ -1,6 +1,7 @@
 // libs:api-contract — transport-neutral response envelope records shared by all REST interfaces.
-plugins { id("erp.java-library") }
+plugins { id("example.java-library") }
 
 dependencies {
-    api("com.fasterxml.jackson.core:jackson-annotations") // version from Boot BOM
+    api(libs.jackson.annotations) // version from the Boot BOM platform import
+    testImplementation(libs.spring.boot.starter.test)
 }

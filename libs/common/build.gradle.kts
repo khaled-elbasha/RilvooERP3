@@ -1,2 +1,2 @@
-// libs:common — framework-free shared kernel (IDs, exceptions, clock abstraction). No Spring Web.
-plugins { id("erp.java-library") }
+// libs:common — framework-free shared kernel (exception vocabulary, safe IDs). No Spring, no Web.
+plugins { id("example.java-library") }

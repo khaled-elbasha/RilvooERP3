@@ -1,4 +1,6 @@
-// build-logic: minimal Gradle convention plugins shared by all erp-systems subprojects.
+// build-logic: minimal Gradle convention plugins shared by all example-project subprojects.
+// The Boot BOM version is passed via convention/gradle.properties (example.springBootVersion),
+// so no version-catalog wiring into the included build is required.
 pluginManagement {
     repositories {
         gradlePluginPortal()
