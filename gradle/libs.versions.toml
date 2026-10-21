@@ -58,6 +58,7 @@ spring-webmvc = { group = "org.springframework", name = "spring-webmvc" }
 jakarta-persistence-api = { group = "jakarta.persistence", name = "jakarta.persistence-api" }
 jakarta-validation-api = { group = "jakarta.validation", name = "jakarta.validation-api" }
 jackson-annotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations" }
+jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind" }
 slf4j-api = { group = "org.slf4j", name = "slf4j-api" }
 
 # --- Spring Security direct coordinates (BOM-managed versions) ----------------

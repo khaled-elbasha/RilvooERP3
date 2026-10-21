@@ -10,6 +10,7 @@ dependencies {
     api(libs.spring.boot.starter.oauth2.resource.server)
     implementation(project(":libs:web"))
     implementation(libs.spring.boot.starter.validation)
+    implementation(libs.jackson.databind)
     annotationProcessor(libs.spring.boot.configuration.processor)
     testImplementation(libs.spring.boot.starter.test)
     testImplementation(libs.spring.security.test)

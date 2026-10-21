@@ -14,7 +14,7 @@ class JavaBaseConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
         pluginManager.apply("java")
         extensions.configure<JavaPluginExtension> {
-            toolchain.languageVersion.set(JavaLanguageVersion.of(25))
+            toolchain.languageVersion.set(JavaLanguageVersion.of(ConventionVersions.JAVA))
         }
         tasks.withType<JavaCompile>().configureEach {
             options.encoding = "UTF-8"

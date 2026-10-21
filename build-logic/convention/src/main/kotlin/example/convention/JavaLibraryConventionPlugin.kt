@@ -12,8 +12,7 @@ class JavaLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
         pluginManager.apply("example.java-base")
         pluginManager.apply("java-library")
-        val bootVersion = providers.gradleProperty("example.springBootVersion")
-            .getOrElse(error("Set example.springBootVersion in build-logic/convention/gradle.properties"))
+        val bootVersion = ConventionVersions.SPRING_BOOT
         dependencies {
             add("implementation", project.dependencies.platform("org.springframework.boot:spring-boot-dependencies:$bootVersion"))
             // The Boot BOM governs compile/runtime/test configurations only. Annotation-processor

@@ -4,9 +4,5 @@
 plugins { id("example.java-library") }
 
 dependencies {
-    // Compile-time API surface only (no runtime DB requirement):
-    compileOnly(libs.jakarta.persistence.api)
-    compileOnly(libs.blaze.core.api)
-    compileOnly(libs.blaze.entity.view.api)
     testImplementation(libs.spring.boot.starter.test)
 }

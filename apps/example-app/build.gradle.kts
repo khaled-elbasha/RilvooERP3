@@ -36,7 +36,7 @@ dependencies {
     // Zalando Logbook (HTTP request/response logging with masking) — active, configured in libs:web.
     implementation(libs.logbook.spring.boot.starter)
 
-    annotationProcessor(libs.spring.boot.configuration.processor)
+    annotationProcessor(libs.spring.boot.configuration.processor.get().let { "${it.group}:${it.name}:${libs.versions.springBoot.get()}" })
 
     testImplementation(libs.spring.boot.starter.test)
     testImplementation(libs.spring.security.test)

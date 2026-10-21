@@ -1,0 +1,6 @@
+# Explicit development profile ONLY. Never use in production.
+# Relaxes the fail-fast check so the template boots without an identity provider; all API
+# endpoints still demand a bearer token verified against the configured issuer (401 otherwise).
+app:
+  security:
+    fail-fast-on-missing-jwt-settings: false
