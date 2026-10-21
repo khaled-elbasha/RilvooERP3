@@ -1,0 +1,43 @@
+# example-project — default (production-shaped) configuration.
+# Startup REQUIRES externalized JWT settings; there are no fallback secrets anywhere.
+server:
+  port: 8080
+  shutdown: graceful
+
+spring:
+  application:
+    name: example-project
+  # No DataSource/JPA/Flyway auto-configuration is triggered: none is on the runtime classpath.
+  jackson:
+    default-property-inclusion: non_null
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+
+app:
+  runtime:
+    apis:
+      # Validated fail-closed at startup by libs:module-runtime. Empty = foundation only.
+      enabled: []
+  security:
+    # Fail-fast defaults: production startup refuses when issuer/audience are missing.
+    fail-fast-on-missing-jwt-settings: true
+    jwt-issuer: ${EXAMPLE_JWT_ISSUER:}
+    jwt-audience: ${EXAMPLE_JWT_AUDIENCE:}
+    jwt-permission-claim: permissions
+    public-paths:
+      - /actuator/health/**
+      - /actuator/info
+    allowed-origins: []
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-},%X{requestId:-}]"
